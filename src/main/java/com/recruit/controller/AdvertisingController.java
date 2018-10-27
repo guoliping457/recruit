@@ -47,14 +47,12 @@ public class AdvertisingController {
                 a.setPositionid(positionid);
                 a.setAimage(uuids);
                 if(adverservice.addadv(a)>0){
-                    System.out.print("sdfghjkl");
                     return "redirect:/webback/queryadvertising.html";
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        System.out.print("21121222");
         return "error";
     }
 
