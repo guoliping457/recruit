@@ -18,6 +18,7 @@
                 <td>创建时间</td>
                 <td>更新时间</td>
                 <td>职位编号</td>
+                <td>操作</td>
             </tr>
             <tr v-for="a in msg">
                 <td>{{a.aid}}</td>
@@ -26,6 +27,9 @@
                 <td>{{a.createtime}}</td>
                 <td>{{a.updatetime}}</td>
                 <td>{{a.positionid}}</td>
+                <td>
+                    <button @click="getindex(a.aid)">删除</button>
+                </td>
             </tr>
         </table>
     </div>
@@ -34,7 +38,7 @@
     <script>
         new Vue({
             el:'#adver',
-            data:{
+                data:{
                 msg:[]
             },
             //回调,获取值
@@ -48,7 +52,26 @@
                         admins.msg=data;
                     }
                 });
-            }
+            },
+            methods:{
+                getindex(index){
+                    $.ajax({
+                        url:"http://localhost:8080/recruit/adver/deladv",
+                        data:{
+                            aid:index
+                        },
+                        type:"post",
+                        success:function (data) {
+                            if(data==true){
+                                alert("删除成功")
+                                window.location.href="../webback/queryadvertising.html"
+                            }else{
+                                alert("删除失败")
+                            }
+                        }
+                    })
+                }
+            },
         })
     </script>
 </html>
