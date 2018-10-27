@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+
+    <div id="adver">
+        <a href="http://localhost:8080/recruit/webback/addadvertising.html">添加广告</a>
+        <table border="1">
+            <tr>
+                <td>广告编号</td>
+                <td>广告标题</td>
+                <td>广告图片</td>
+                <td>创建时间</td>
+                <td>更新时间</td>
+                <td>职位编号</td>
+            </tr>
+            <tr v-for="a in msg">
+                <td>{{a.aid}}</td>
+                <td>{{a.atitle}}</td>
+                <td>{{a.aimage}}</td>
+                <td>{{a.createtime}}</td>
+                <td>{{a.updatetime}}</td>
+                <td>{{a.positionid}}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+    <script>
+        new Vue({
+            el:'#adver',
+            data:{
+                msg:[]
+            },
+            //回调,获取值
+            created:function () {
+                var admins=this;
+                $.ajax({
+                    url:"http://localhost:8080/recruit/adver/queryadv",
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                        admins.msg=data;
+                    }
+                });
+            }
+        })
+    </script>
+</html>
